@@ -39,8 +39,10 @@ Sub ConvertToRupees()
 End Sub
 
 ' 4. Excel global function (UDF) facility
+' IMPORTANT: This code MUST be placed in a STANDARD MODULE (Insert > Module)
 ' Usage in sheet: =CONVERTTOTEXT(E3)
 Public Function CONVERTTOTEXT(TargetCell As Variant) As String
+    Application.Volatile
     Dim inputVal As Variant
     
     ' Handle range input
@@ -61,7 +63,7 @@ Public Function CONVERTTOTEXT(TargetCell As Variant) As String
 End Function
 
 
-Function RupeeFormat(SNum As String)
+Public Function RupeeFormat(SNum As String)
 'Updateby Extendoffice
 Dim xDPInt As Integer
 Dim xArrPlace As Variant
