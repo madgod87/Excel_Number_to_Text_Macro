@@ -1,54 +1,79 @@
 # Excel Number to Indian Rupee Text Macro
 
-A powerful VBA macro and User Defined Function (UDF) for Microsoft Excel that converts numerical values into their word representation in the **Indian Rupee (INR)** format (e.g., 1,23,456.78 becomes "Rupees One Lac Twenty Three Thousand Four Hundred Fifty Six and Seventy Eight Paisas Only").
+A powerful VBA macro and User Defined Function (UDF) for Microsoft Excel that converts numerical values into their word representation in the **Indian Rupee (INR)** format. 
 
-## Features
+*Example: `1,23,456.78` becomes **"Rupees One Lac Twenty Three Thousand Four Hundred Fifty Six and Seventy Eight Paisas Only"***.
 
-- **Bulk Conversion**: Select multiple cells at once and convert them to text.
-- **Destination Control**: Choose a separate range for the output text to preserve your original numerical data.
-- **Global Function**: Includes the `=CONVERTTOTEXT()` function for use directly in Excel formulas.
-- **Indian Numbering System**: Tailored for Lacs and Crores.
-- **Decimal Support**: Handles Paisas automatically.
+---
 
-## How to Install
+## 🚀 Features
 
-1. Open your Excel Workbook.
-2. Press `ALT + F11` to open the VBA Editor.
-3. Click `Insert` > `Module`.
-4. Copy the contents of `excelNumberToText.vba` from this repository and paste it into the module.
-5. Close the VBA Editor.
-6. Save your workbook as an **Excel Macro-Enabled Workbook (.xlsm)**.
+- **Bulk Conversion**: Select multiple cells and convert them all at once.
+- **Separate Destination**: Keeps your original numbers safe by writing the text to a different column.
+- **Formula Support**: Use `=CONVERTTOTEXT()` directly in your spreadsheet.
+- **Indian Numbering**: Properly handles Thousands, Lacs, and Crores.
+- **Decimal Support**: Converts fractions into Paisas automatically.
 
-## How to Use
+---
 
-### Method 1: Using the Macro (Bulk Conversion)
-1. Press `ALT + F8` and select `ConvertToRupees`.
-2. Select the cells containing the numbers you want to convert.
-3. Select the destination cells where you want the text to appear.
-4. The macro will validate the range sizes and perform the conversion.
+## 🛠️ Step 1: Initial Setup (For Beginners)
 
-## Troubleshooting #NAME? Error
+If you want this macro to be available in **every** Excel file you open, you should put it in your **Personal Macro Workbook (PERSONAL.XLSB)**. Here is how to create it if you don't have one:
 
-If Excel does not recognize the formula, check the following:
+1. **Show the Developer Tab** (if not visible):
+   - Right-click any tab on the Ribbon (e.g., Home) and select **Customize the Ribbon**.
+   - In the right-hand list, check the box for **Developer** and click **OK**.
+2. **Create the PERSONAL.XLSB file**:
+   - Go to the **Developer** tab and click **Record Macro**.
+   - In the "Store macro in" dropdown, select **Personal Macro Workbook**.
+   - Click **OK**, then click any cell in your sheet, and immediately click **Stop Recording**. 
+   - *This "tricks" Excel into creating the hidden Personal file for you.*
+3. **Open the VBA Editor**:
+   - Press `ALT + F11` on your keyboard.
+4. **Paste the Code**:
+   - In the left-hand pane (Project Explorer), find **VBAProject (PERSONAL.XLSB)**.
+   - Right-click the **Modules** folder inside it and select **Insert > Module**.
+   - **Rename the Module**: In the Properties window (bottom-left), change the Name from `Module1` to `modNumberToText`. (Important: Do not name it exact same as the function).
+   - Copy the entire code from `excelNumberToText.vba` in this repository and paste it into the large white code window.
+5. **Save & Exit**:
+   - Click the **Save** icon in the VBA editor.
+   - Close the VBA window and return to Excel.
 
-### 1. The Prefix Requirement
-If you have pasted the code into your **PERSONAL.XLSB** (Personal Macro Workbook), you must use the prefix:
-```excel
-=PERSONAL.XLSB!CONVERTTOTEXT(A1)
-```
+---
 
-### 2. Module Naming Conflict
-**IMPORTANT**: Do not name the Module the same as the Function.
-- In the VBA Editor, if your module is named `CONVERTTOTEXT`, rename it to `modNumberToText`.
+## 📖 How to Use
 
-### 3. Truly Global Usage (No Prefix)
-To use `=CONVERTTOTEXT()` without any prefix in every workbook:
-1. Copy the code into a new Excel file.
-2. Save the file as an **Excel Add-In (.xlam)**.
-3. Enable the Add-in via `Developer` > `Excel Add-ins`.
+### Method 1: Using the Macro (Bulk Processing)
+Best for converting hundreds of rows at once.
+1. Press `ALT + F8` on your keyboard.
+2. Select `PERSONAL.XLSB!ConvertToRupees` and click **Run**.
+3. **Step A**: Select the cells containing your numbers.
+4. **Step B**: Select the first cell where you want the text to start appearing.
+5. The macro will fill the destination cells automatically.
 
-## Limitations
-- Maximum supported value: 99 Crores (999,999,999.99).
+### Method 2: Using the Formula (Dynamic)
+Best for individual cells that might change frequently.
+1. In any cell, type:
+   ```excel
+   =PERSONAL.XLSB!CONVERTTOTEXT(A1)
+   ```
+   *(Where `A1` is the cell with the number).*
 
-## License
-MIT License
+> **Tip**: If you find the `PERSONAL.XLSB!` prefix annoying, you can save the code as an **Excel Add-In (.xlam)** instead. Instructions for that can be found in advanced Excel guides.
+
+---
+
+## ⚠️ Troubleshooting #NAME? Error
+
+If Excel shows `#NAME?`, check these three things:
+1. **The Prefix**: Ensure you are typing `PERSONAL.XLSB!` before the function name if the code is in your personal workbook.
+2. **Module Name**: Make sure your **Module** name is NOT `CONVERTTOTEXT`. Rename it to `modNumberToText` as shown in the setup steps.
+3. **Macro Security**: Go to `File > Options > Trust Center > Trust Center Settings > Macro Settings` and ensure macros are enabled.
+
+---
+
+## 📉 Limitations
+- **Maximum Value**: Supports up to 99 Crores (`999,999,999.99`).
+
+## 📜 License
+MIT License - Feel free to use and modify for personal or commercial projects.
