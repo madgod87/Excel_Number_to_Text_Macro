@@ -1,0 +1,7 @@
+*.xlsx
+*.xlsm
+*.xlsb
+~$*
+.DS_Store
+.vscode/
+.gemini/
