@@ -27,12 +27,25 @@ A powerful VBA macro and User Defined Function (UDF) for Microsoft Excel that co
 3. Select the destination cells where you want the text to appear.
 4. The macro will validate the range sizes and perform the conversion.
 
-### Method 2: Using the Formula
-1. In any cell, type:
-   ```excel
-   =CONVERTTOTEXT(A1)
-   ```
-   (Where `A1` is the cell containing the number).
+## Troubleshooting #NAME? Error
+
+If Excel does not recognize the formula, check the following:
+
+### 1. The Prefix Requirement
+If you have pasted the code into your **PERSONAL.XLSB** (Personal Macro Workbook), you must use the prefix:
+```excel
+=PERSONAL.XLSB!CONVERTTOTEXT(A1)
+```
+
+### 2. Module Naming Conflict
+**IMPORTANT**: Do not name the Module the same as the Function.
+- In the VBA Editor, if your module is named `CONVERTTOTEXT`, rename it to `modNumberToText`.
+
+### 3. Truly Global Usage (No Prefix)
+To use `=CONVERTTOTEXT()` without any prefix in every workbook:
+1. Copy the code into a new Excel file.
+2. Save the file as an **Excel Add-In (.xlam)**.
+3. Enable the Add-in via `Developer` > `Excel Add-ins`.
 
 ## Limitations
 - Maximum supported value: 99 Crores (999,999,999.99).
